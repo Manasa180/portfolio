@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #2575fc;
+            color: white;
+            padding: 10px 0;
+        }
+
+        main {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form label, form input, form button {
+            margin: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: white;
+        }
+
+        li button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Task Tracker</h1>
+    </header>
+
+    <main>
+        <form id="taskForm">
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName" required>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <ul id="taskList">
+            <!-- Tasks will be dynamically added here -->
+        </ul>
+    </main>
+
+    <script>
+        document.getElementById('taskForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const taskName = document.getElementById('taskName').value.trim();
+            if (taskName !== '') {
+                const taskItem = document.createElement('li');
+                taskItem.textContent = taskName;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.addEventListener('click', function() {
+                    taskItem.remove();
+                });
+
+                taskItem.appendChild(deleteButton);
+                document.getElementById('taskList').appendChild(taskItem);
+
+                document.getElementById('taskName').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
